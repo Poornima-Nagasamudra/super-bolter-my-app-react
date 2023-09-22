@@ -21,22 +21,8 @@ export const DesignImage = (props) => {
     const [images, setImages] = useState(arr);
     const [comment, setComment] = useState("");
 
-    // Load data from localStorage if available or use a default initial value
-    // useEffect(() => {
-    //     const items = JSON.parse(localStorage.getItem('images'));
-    //     if (items) {
-    //       setImages(items)
-    //     }
-    // }, [])
-
-    // // Save data to localStorage whenever it changes
-    // useEffect(() => {
-    //     localStorage.setItem('images', JSON.stringify(images));
-    // }, [images]);
-
     // like button
     const handleUp = (id) => {
-        console.log(id);
         setImages((images) => 
            images.map((ele) => 
              ele.id === id ? { ...ele, like: ele.like + 1 } : ele
@@ -54,28 +40,14 @@ export const DesignImage = (props) => {
     }
 
     // comment edit
-    function handleEdit(id, commentId, editedText) {
-        // const result = images.map(function (ele) {
-        //     if (ele.id === id) {
-        //         const obj = { ...ele };
-        //         obj.comments = ele.comments.map((elements, index) => (index.userId === commentId));
-        //         return { obj, body: editedText };
-
-        //     } else {
-        //         return { ...ele };
-        //     }
-        // });
-        // setImages(result);
-
+    const handleEdit = (id, commentId, editedText) => {
         setImages((prevData) =>
         prevData.map((item) =>
           item.id === id
-            ? {
-                ...item,
+            ? { ...item,
                 comments: item.comments.map((comment) =>
                   comment.userId === commentId
-                    ? { ...comment, body: editedText }
-                    : comment
+                    ? { ...comment, body: editedText } : comment
                 ),
               }
             : item
